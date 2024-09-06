@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://be5ofn5mgok6l"]
+[gd_scene load_steps=4 format=3 uid="uid://be5ofn5mgok6l"]
 
 [ext_resource type="PackedScene" uid="uid://ds3j11evmvpr2" path="res://characters/player/scripts/player.tscn" id="1_m1ugv"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x8ggn"]
+polygon = PackedVector2Array(3, -2, 1277, 2, 1277, 158, 2, 158)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwpdj"]
 size = Vector2(1101.5, 187)
 
 [node name="Testing" type="Node2D"]
+
+[node name="Light" type="Node2D" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Light"]
+position = Vector2(0, 562)
+occluder = SubResource("OccluderPolygon2D_x8ggn")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-7, 375)
@@ -25,4 +34,4 @@ position = Vector2(560.25, 308.5)
 shape = SubResource("RectangleShape2D_vwpdj")
 
 [node name="Player" parent="." instance=ExtResource("1_m1ugv")]
-position = Vector2(145, 546)
+position = Vector2(172, 547)
