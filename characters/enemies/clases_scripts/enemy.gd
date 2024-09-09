@@ -17,7 +17,7 @@ var state: int = 0:
 @onready var animEnemy = $Animations/AnimationPlayer
 var player: CharacterBody2D
 
-const IDLE_SPEED = 120
+const IDLE_SPEED = 60
 var Axis = [Vector2.LEFT, Vector2.RIGHT]
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
