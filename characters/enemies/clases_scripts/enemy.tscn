@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://6v5ka0fk27rg"]
+
+[ext_resource type="Script" path="res://characters/enemies/clases_scripts/enemy.gd" id="1_sdvho"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1yoog"]
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgdup"]
+size = Vector2(156, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ct4kr"]
+size = Vector2(200, 114)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_sdvho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1yoog")
+
+[node name="Animations" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+root_node = NodePath("../..")
+
+[node name="Directions" type="Node2D" parent="."]
+
+[node name="AttackDirection" type="Node2D" parent="Directions"]
+
+[node name="DamageBox" type="Node2D" parent="Directions/AttackDirection"]
+
+[node name="HurtBox" type="Area2D" parent="Directions/AttackDirection/DamageBox"]
+
+[node name="HitBox" type="Area2D" parent="Directions/AttackDirection/DamageBox"]
+
+[node name="RangeBox" type="Node2D" parent="Directions/AttackDirection"]
+
+[node name="AttackRange" type="Area2D" parent="Directions/AttackDirection/RangeBox"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/AttackDirection/RangeBox/AttackRange"]
+
+[node name="Zones" type="Node2D" parent="Directions"]
+
+[node name="DetecteZone" type="Area2D" parent="Directions/Zones"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/DetecteZone"]
+shape = SubResource("RectangleShape2D_jgdup")
+debug_color = Color(0.90793, 0.254964, 0.414317, 0.42)
+
+[node name="ExitZone" type="Area2D" parent="Directions/Zones"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/ExitZone"]
+shape = SubResource("RectangleShape2D_ct4kr")
+debug_color = Color(0.215609, 0.624294, 0.402668, 0.42)
+
+[node name="RayCast" type="Node2D" parent="Directions/Zones"]
+
+[node name="RayCast_R" type="RayCast2D" parent="Directions/Zones/RayCast"]
+position = Vector2(10, 16)
+target_position = Vector2(0, 9)
+
+[node name="RayCast_L" type="RayCast2D" parent="Directions/Zones/RayCast"]
+position = Vector2(-10, 16)
+target_position = Vector2(0, 9)
+
+[node name="Timers" type="Node2D" parent="Directions/Zones"]
+
+[node name="TimerChase" type="Timer" parent="Directions/Zones/Timers"]
+one_shot = true
+
+[node name="TimerIdle" type="Timer" parent="Directions/Zones/Timers"]
+one_shot = true
+
+[connection signal="body_entered" from="Directions/AttackDirection/RangeBox/AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_entered" from="Directions/Zones/DetecteZone" to="." method="_on_detecte_zone_body_entered"]
+[connection signal="body_exited" from="Directions/Zones/ExitZone" to="." method="_on_exit_zone_body_exited"]
+[connection signal="timeout" from="Directions/Zones/Timers/TimerChase" to="." method="_on_timer_chase_timeout"]
+[connection signal="timeout" from="Directions/Zones/Timers/TimerIdle" to="." method="_on_timer_idle_timeout"]
