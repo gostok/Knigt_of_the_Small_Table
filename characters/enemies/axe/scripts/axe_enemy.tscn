@@ -24,8 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bulcsb6fbd0j0" path="res://characters/enemies/axe/sprite/walk_5.png" id="21_vtb3k"]
 [ext_resource type="Texture2D" uid="uid://d0ia5wh24wbui" path="res://characters/enemies/axe/sprite/walk_6.png" id="22_ka20l"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_er7kh"]
-height = 32.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tyixm"]
 
 [sub_resource type="Animation" id="Animation_de4y2"]
 length = 0.75
@@ -321,17 +320,17 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dpm0"]
-size = Vector2(156, 80)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id4mo"]
 size = Vector2(200, 114)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dpm0"]
+size = Vector2(156, 80)
 
 [node name="Axe_Enemy" type="CharacterBody2D"]
 script = ExtResource("1_lxvef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_er7kh")
+shape = SubResource("CapsuleShape2D_tyixm")
 
 [node name="Animations" type="Node2D" parent="."]
 
@@ -346,10 +345,42 @@ autoplay = "Idle"
 position = Vector2(2, -11)
 scale = Vector2(0.86, 0.8)
 sprite_frames = SubResource("SpriteFrames_bymc4")
-animation = &"Walk"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="Directions" type="Node2D" parent="."]
+
+[node name="Zones" type="Node2D" parent="Directions"]
+
+[node name="Timers" type="Node2D" parent="Directions/Zones"]
+
+[node name="TimerWandering" type="Timer" parent="Directions/Zones/Timers"]
+one_shot = true
+
+[node name="TimerIdle" type="Timer" parent="Directions/Zones/Timers"]
+one_shot = true
+
+[node name="ExitZone" type="Area2D" parent="Directions/Zones"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/ExitZone"]
+shape = SubResource("RectangleShape2D_id4mo")
+debug_color = Color(0.215609, 0.624294, 0.402668, 0.42)
+
+[node name="DetecteZone" type="Area2D" parent="Directions/Zones"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/DetecteZone"]
+shape = SubResource("RectangleShape2D_5dpm0")
+debug_color = Color(0.90793, 0.254964, 0.414317, 0.42)
+
+[node name="RayCast" type="Node2D" parent="Directions/Zones"]
+
+[node name="RayCast_R" type="RayCast2D" parent="Directions/Zones/RayCast"]
+position = Vector2(11, 15)
+target_position = Vector2(0, 9)
+
+[node name="RayCast_L" type="RayCast2D" parent="Directions/Zones/RayCast"]
+position = Vector2(-11, 15)
+target_position = Vector2(0, 9)
 
 [node name="AttackDirection" type="Node2D" parent="Directions"]
 
@@ -367,34 +398,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/AttackDirection/RangeBox/AttackRange"]
 
-[node name="Zones" type="Node2D" parent="Directions"]
-
-[node name="DetecteZone" type="Area2D" parent="Directions/Zones"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/DetecteZone"]
-shape = SubResource("RectangleShape2D_5dpm0")
-debug_color = Color(0.90793, 0.254964, 0.414317, 0.42)
-
-[node name="ExitZone" type="Area2D" parent="Directions/Zones"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/ExitZone"]
-shape = SubResource("RectangleShape2D_id4mo")
-debug_color = Color(0.215609, 0.624294, 0.402668, 0.42)
-
-[node name="RayCast" type="Node2D" parent="Directions/Zones"]
-
-[node name="RayCast_R" type="RayCast2D" parent="Directions/Zones/RayCast"]
-position = Vector2(10, 16)
-target_position = Vector2(0, 9)
-
-[node name="RayCast_L" type="RayCast2D" parent="Directions/Zones/RayCast"]
-position = Vector2(-10, 16)
-target_position = Vector2(0, 9)
-
-[node name="Timers" type="Node2D" parent="Directions/Zones"]
-
-[node name="TimerChase" type="Timer" parent="Directions/Zones/Timers"]
-one_shot = true
-
-[node name="TimerIdle" type="Timer" parent="Directions/Zones/Timers"]
-one_shot = true
+[connection signal="timeout" from="Directions/Zones/Timers/TimerWandering" to="." method="_on_timer_wandering_timeout"]
+[connection signal="timeout" from="Directions/Zones/Timers/TimerIdle" to="." method="_on_timer_idle_timeout"]
+[connection signal="body_exited" from="Directions/Zones/ExitZone" to="." method="_on_exit_zone_body_exited"]
+[connection signal="body_entered" from="Directions/Zones/DetecteZone" to="." method="_on_detecte_zone_body_entered"]

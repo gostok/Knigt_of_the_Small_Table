@@ -51,4 +51,4 @@ color = Color(0.594928, 0.278089, 0.0570762, 1)
 position = Vector2(172, 547)
 
 [node name="Axe_Enemy" parent="." instance=ExtResource("2_yl6xe")]
-position = Vector2(337, 485)
+position = Vector2(337, 487)
