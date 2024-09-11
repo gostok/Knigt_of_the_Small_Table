@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bn61qfsak2xeb"]
+[gd_scene load_steps=56 format=3 uid="uid://bn61qfsak2xeb"]
 
 [ext_resource type="Texture2D" uid="uid://tooxvt4ypbqq" path="res://characters/enemies/axe/sprite/attack1_1.png" id="1_l3i5a"]
 [ext_resource type="Script" path="res://characters/enemies/axe/scripts/axe_enemy.gd" id="1_lxvef"]
@@ -327,6 +327,9 @@ size = Vector2(200, 114)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dpm0"]
 size = Vector2(156, 80)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exdyg"]
+size = Vector2(8.83059, 10.4167)
+
 [node name="Axe_Enemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 3
@@ -348,8 +351,9 @@ autoplay = "Idle"
 position = Vector2(2, -11)
 scale = Vector2(0.86, 0.8)
 sprite_frames = SubResource("SpriteFrames_bymc4")
-animation = &"Walk"
+animation = &"Attack"
 autoplay = "Idle"
+frame = 3
 
 [node name="Directions" type="Node2D" parent="."]
 
@@ -404,8 +408,13 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/AttackDirection/RangeBox/AttackRange"]
+position = Vector2(21, 0)
+scale = Vector2(4.7562, 2.88)
+shape = SubResource("RectangleShape2D_exdyg")
+debug_color = Color(0.302338, 0.520014, 0.924175, 0.42)
 
 [connection signal="timeout" from="Directions/Zones/Timers/TimerWandering" to="." method="_on_timer_wandering_timeout"]
 [connection signal="timeout" from="Directions/Zones/Timers/TimerIdle" to="." method="_on_timer_idle_timeout"]
 [connection signal="body_exited" from="Directions/Zones/ExitZone" to="." method="_on_exit_zone_body_exited"]
 [connection signal="body_entered" from="Directions/Zones/DetecteZone" to="." method="_on_detecte_zone_body_entered"]
+[connection signal="body_entered" from="Directions/AttackDirection/RangeBox/AttackRange" to="." method="_on_attack_range_body_entered"]

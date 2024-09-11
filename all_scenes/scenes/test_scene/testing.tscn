@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://be5ofn5mgok6l"]
+[gd_scene load_steps=7 format=3 uid="uid://be5ofn5mgok6l"]
 
 [ext_resource type="PackedScene" uid="uid://ds3j11evmvpr2" path="res://characters/player/scripts/player.tscn" id="1_m1ugv"]
 [ext_resource type="PackedScene" uid="uid://bn61qfsak2xeb" path="res://characters/enemies/axe/scripts/axe_enemy.tscn" id="2_yl6xe"]
@@ -10,7 +10,10 @@ polygon = PackedVector2Array(3, -2, 1277, 2, 1277, 158, 2, 158)
 size = Vector2(1101.5, 187)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1hq5"]
-size = Vector2(121.379, 26.3453)
+size = Vector2(122.603, 24.518)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdjf5"]
+size = Vector2(18.9948, 15.1778)
 
 [node name="Testing" type="Node2D"]
 
@@ -37,14 +40,25 @@ position = Vector2(560.25, 308.5)
 shape = SubResource("RectangleShape2D_vwpdj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(295.283, 161.118)
+position = Vector2(294.42, 160.535)
 shape = SubResource("RectangleShape2D_l1hq5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(197.719, 182.718)
+shape = SubResource("RectangleShape2D_tdjf5")
 
 [node name="ColorRect2" type="ColorRect" parent="StaticBody2D"]
 offset_left = 233.0
 offset_top = 148.0
 offset_right = 356.0
 offset_bottom = 175.0
+color = Color(0.594928, 0.278089, 0.0570762, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="StaticBody2D"]
+offset_left = 188.221
+offset_top = 175.129
+offset_right = 207.221
+offset_bottom = 190.129
 color = Color(0.594928, 0.278089, 0.0570762, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_m1ugv")]

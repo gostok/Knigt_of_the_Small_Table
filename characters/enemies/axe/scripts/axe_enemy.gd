@@ -1,31 +1,33 @@
 extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum {
+	CHASE,
 	ATTACK,
 	WANDERING,
 	IDLE
 }
+
+var state = IDLE
+
+
 
 var player = null
 var player_chase = false
 @onready var animEnemy = $Animations/AnimationPlayer
 @onready var anim = $Animations/AnimatedSprite2D
 const SPEED = 25
-var state = IDLE
+
 
 var Axis = [Vector2.LEFT, Vector2.RIGHT]
 
 
 func _ready() -> void:
 	randomize()
-	#connect("body_entered", Callable(self, "_on_detecte_zone_body_entered"))
-	#connect("body_exited", Callable(self, "_on_exit_zone_body_exited"))
+
 
 
 func _physics_process(delta: float) -> void:
-	match state:
-		ATTACK: pass
-		
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
@@ -37,18 +39,30 @@ func _physics_process(delta: float) -> void:
 		if $Directions/Zones/Timers/TimerWandering.is_stopped():
 			$Directions/Zones/Timers/TimerWandering.start(randi_range(1, 5))
 			velocity = Axis.pick_random() * SPEED
-	elif state == ATTACK:
+	elif state == CHASE:
 		player_chase = true
 		$Directions/Zones/Timers/TimerIdle.stop()
 		$Directions/Zones/Timers/TimerWandering.stop()
-		var t = (player.position - self.position).normalized()
-		velocity = (Vector2.LEFT if Vector2.RIGHT.dot(t) < Vector2.LEFT.dot(t) else Vector2.RIGHT) * SPEED
-		if t:
-			animEnemy.play('Walk')
-			if (t and !$Directions/Zones/RayCast/RayCast_L.is_colliding()) or (t and !$Directions/Zones/RayCast/RayCast_R.is_colliding()):
-				animEnemy.play("Idle")
+		if player != null:
+			var t = (player.position - self.position).normalized()
+			velocity = (Vector2.LEFT if Vector2.RIGHT.dot(t) < Vector2.LEFT.dot(t) else Vector2.RIGHT) * SPEED
+		
+			if t:
+				animEnemy.play('Walk')
+				if (t and !$Directions/Zones/RayCast/RayCast_L.is_colliding()) or (t and !$Directions/Zones/RayCast/RayCast_R.is_colliding()):
+					animEnemy.play("Idle")
+			if t.x <0:
+				anim.flip_h = true
+				$Directions/AttackDirection.rotation_degrees = 180
+			else:
+				anim.flip_h = false
+				$Directions/AttackDirection.rotation_degrees = 0
+		if $Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled == true:
+			await get_tree().create_timer(1).timeout
+			$Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled = false
 
-
+	elif state == ATTACK:
+		attack_state()
 
 
 	if velocity.x < 0:
@@ -76,7 +90,7 @@ func _on_timer_idle_timeout() -> void:
 func _on_detecte_zone_body_entered(body):
 	player = body
 	player_chase = true
-	state = ATTACK
+	state = CHASE
 
 
 func _on_exit_zone_body_exited(body):
@@ -91,3 +105,17 @@ func check_down(vel: Vector2):
 
 	elif vel == Vector2.RIGHT and !$Directions/Zones/RayCast/RayCast_R.is_colliding():
 		velocity = Vector2.LEFT * SPEED
+
+
+func _on_attack_range_body_entered(body):
+	animEnemy.play("Idle")
+	state == ATTACK
+
+
+func attack_state():
+	velocity.x = 0
+	animEnemy.play("Attack")
+	await animEnemy.animation_finished
+	$Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled = true
+	state = CHASE
+	
