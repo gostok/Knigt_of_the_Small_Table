@@ -110,6 +110,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_86q6n"]
 length = 0.75
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -327,6 +328,8 @@ size = Vector2(200, 114)
 size = Vector2(156, 80)
 
 [node name="Axe_Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_lxvef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -345,7 +348,7 @@ autoplay = "Idle"
 position = Vector2(2, -11)
 scale = Vector2(0.86, 0.8)
 sprite_frames = SubResource("SpriteFrames_bymc4")
-animation = &"Idle"
+animation = &"Walk"
 autoplay = "Idle"
 
 [node name="Directions" type="Node2D" parent="."]
@@ -361,12 +364,16 @@ one_shot = true
 one_shot = true
 
 [node name="ExitZone" type="Area2D" parent="Directions/Zones"]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/ExitZone"]
 shape = SubResource("RectangleShape2D_id4mo")
 debug_color = Color(0.215609, 0.624294, 0.402668, 0.42)
 
 [node name="DetecteZone" type="Area2D" parent="Directions/Zones"]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Zones/DetecteZone"]
 shape = SubResource("RectangleShape2D_5dpm0")

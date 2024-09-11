@@ -8,7 +8,7 @@ var state = MOVE
 var gold = 0
 var health = 100
 const SPEED = 100
-const JUMP = -400.0
+const JUMP = -200.0
 var combo = false
 var attack_cooldown = false
 @onready var anim = $Animation/AnimatedSprite2D
@@ -17,7 +17,7 @@ var attack_cooldown = false
 var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
 
 func _ready() -> void:
-	pass
+	add_to_group('players')
 
 func _physics_process(delta):
 	match  state:
