@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bn61qfsak2xeb"]
+[gd_scene load_steps=57 format=3 uid="uid://bn61qfsak2xeb"]
 
 [ext_resource type="Texture2D" uid="uid://tooxvt4ypbqq" path="res://characters/enemies/axe/sprite/attack1_1.png" id="1_l3i5a"]
 [ext_resource type="Script" path="res://characters/enemies/axe/scripts/axe_enemy.gd" id="1_lxvef"]
@@ -327,8 +327,12 @@ size = Vector2(200, 114)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dpm0"]
 size = Vector2(156, 80)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_scsd2"]
+radius = 11.0
+height = 34.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exdyg"]
-size = Vector2(8.83059, 10.4167)
+size = Vector2(6.51781, 10.4167)
 
 [node name="Axe_Enemy" type="CharacterBody2D"]
 collision_layer = 4
@@ -398,6 +402,12 @@ target_position = Vector2(0, 9)
 [node name="DamageBox" type="Node2D" parent="Directions/AttackDirection"]
 
 [node name="HurtBox" type="Area2D" parent="Directions/AttackDirection/DamageBox"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/AttackDirection/DamageBox/HurtBox"]
+shape = SubResource("CapsuleShape2D_scsd2")
+debug_color = Color(0.913725, 0.160784, 0.603922, 0.211765)
 
 [node name="HitBox" type="Area2D" parent="Directions/AttackDirection/DamageBox"]
 
@@ -408,7 +418,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/AttackDirection/RangeBox/AttackRange"]
-position = Vector2(21, 0)
+position = Vector2(15.5, 0)
 scale = Vector2(4.7562, 2.88)
 shape = SubResource("RectangleShape2D_exdyg")
 debug_color = Color(0.302338, 0.520014, 0.924175, 0.42)

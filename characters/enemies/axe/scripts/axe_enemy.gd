@@ -4,7 +4,8 @@ enum {
 	CHASE,
 	ATTACK,
 	WANDERING,
-	IDLE
+	IDLE,
+	STOP
 }
 
 var state = IDLE
@@ -39,6 +40,11 @@ func _physics_process(delta: float) -> void:
 		if $Directions/Zones/Timers/TimerWandering.is_stopped():
 			$Directions/Zones/Timers/TimerWandering.start(randi_range(1, 5))
 			velocity = Axis.pick_random() * SPEED
+
+	elif  state == STOP:
+		velocity.x = 0
+		animEnemy.play("Idle")
+
 	elif state == CHASE:
 		player_chase = true
 		$Directions/Zones/Timers/TimerIdle.stop()
@@ -46,23 +52,24 @@ func _physics_process(delta: float) -> void:
 		if player != null:
 			var t = (player.position - self.position).normalized()
 			velocity = (Vector2.LEFT if Vector2.RIGHT.dot(t) < Vector2.LEFT.dot(t) else Vector2.RIGHT) * SPEED
-		
+			if $Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled == true:
+				animEnemy.play("Idle")
+				await get_tree().create_timer(1).timeout
+				$Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled = false
 			if t:
 				animEnemy.play('Walk')
 				if (t and !$Directions/Zones/RayCast/RayCast_L.is_colliding()) or (t and !$Directions/Zones/RayCast/RayCast_R.is_colliding()):
 					animEnemy.play("Idle")
-			if t.x <0:
-				anim.flip_h = true
-				$Directions/AttackDirection.rotation_degrees = 180
-			else:
-				anim.flip_h = false
-				$Directions/AttackDirection.rotation_degrees = 0
-		if $Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled == true:
-			await get_tree().create_timer(1).timeout
-			$Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled = false
+				if t.x <0:
+					anim.flip_h = true
+					$Directions/AttackDirection.rotation_degrees = 180
+				else:
+					anim.flip_h = false
+					$Directions/AttackDirection.rotation_degrees = 0
 
 	elif state == ATTACK:
 		attack_state()
+
 
 
 	if velocity.x < 0:
@@ -107,15 +114,14 @@ func check_down(vel: Vector2):
 		velocity = Vector2.LEFT * SPEED
 
 
-func _on_attack_range_body_entered(body):
-	animEnemy.play("Idle")
-	state == ATTACK
 
+
+func _on_attack_range_body_entered(body: CharacterBody2D) -> void:
+	state = ATTACK
 
 func attack_state():
-	velocity.x = 0
+	velocity.x = 0 
 	animEnemy.play("Attack")
 	await animEnemy.animation_finished
 	$Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled = true
 	state = CHASE
-	
