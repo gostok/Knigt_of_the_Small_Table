@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://be5ofn5mgok6l"]
+[gd_scene load_steps=9 format=3 uid="uid://be5ofn5mgok6l"]
 
 [ext_resource type="PackedScene" uid="uid://ds3j11evmvpr2" path="res://characters/player/scripts/player.tscn" id="1_m1ugv"]
 [ext_resource type="PackedScene" uid="uid://bn61qfsak2xeb" path="res://characters/enemies/axe/scripts/axe_enemy.tscn" id="2_yl6xe"]
+[ext_resource type="PackedScene" uid="uid://b0djvfl4mu8qt" path="res://characters/enemies/demon/Fallen_Knight_Enemy.tscn" id="3_pmqfc"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x8ggn"]
 polygon = PackedVector2Array(3, -2, 1277, 2, 1277, 158, 2, 158)
@@ -14,6 +15,9 @@ size = Vector2(122.603, 24.518)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tdjf5"]
 size = Vector2(18.9948, 15.1778)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1y81"]
+size = Vector2(193.904, 36.8531)
 
 [node name="Testing" type="Node2D"]
 
@@ -61,8 +65,23 @@ offset_right = 207.221
 offset_bottom = 190.129
 color = Color(0.594928, 0.278089, 0.0570762, 1)
 
+[node name="ColorRect4" type="ColorRect" parent="StaticBody2D"]
+offset_left = 580.206
+offset_top = 163.453
+offset_right = 774.206
+offset_bottom = 200.453
+color = Color(0.596078, 0.278431, 0.0588235, 1)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(677.519, 181.22)
+shape = SubResource("RectangleShape2D_j1y81")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
 [node name="Player" parent="." instance=ExtResource("1_m1ugv")]
 position = Vector2(80, 536)
 
 [node name="Axe_Enemy" parent="." instance=ExtResource("2_yl6xe")]
 position = Vector2(337, 487)
+
+[node name="Fallen_Knight_Enemy" parent="." instance=ExtResource("3_pmqfc")]
+position = Vector2(163, 545)

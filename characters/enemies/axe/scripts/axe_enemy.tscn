@@ -355,9 +355,8 @@ autoplay = "Idle"
 position = Vector2(2, -11)
 scale = Vector2(0.86, 0.8)
 sprite_frames = SubResource("SpriteFrames_bymc4")
-animation = &"Attack"
+animation = &"Walk"
 autoplay = "Idle"
-frame = 3
 
 [node name="Directions" type="Node2D" parent="."]
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bhp15tbt802jd"
+path="res://.godot/imported/fallen_knight.dialogue-5b891b34787c59dfb3680de8f40b8d0f.tres"
+
+[deps]
+
+source_file="res://dialogs/fallen_knight.dialogue"
+dest_files=["res://.godot/imported/fallen_knight.dialogue-5b891b34787c59dfb3680de8f40b8d0f.tres"]
+
+[params]
+
+defaults=true
