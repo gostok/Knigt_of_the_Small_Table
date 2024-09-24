@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bn61qfsak2xeb"]
+[gd_scene load_steps=59 format=3 uid="uid://bn61qfsak2xeb"]
 
 [ext_resource type="Texture2D" uid="uid://tooxvt4ypbqq" path="res://characters/enemies/axe/sprite/attack1_1.png" id="1_l3i5a"]
 [ext_resource type="Script" path="res://characters/enemies/axe/scripts/axe_enemy.gd" id="1_lxvef"]
@@ -51,6 +51,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Attack"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Directions/AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.633333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_21op3"]
@@ -136,11 +148,27 @@ tracks/1/keys = {
 "values": ["Walk"]
 }
 
+[sub_resource type="Animation" id="Animation_shvb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Directions/AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rtwmo"]
 _data = {
 "Attack": SubResource("Animation_de4y2"),
 "Death": SubResource("Animation_21op3"),
 "Idle": SubResource("Animation_cxngq"),
+"RESET": SubResource("Animation_shvb4"),
 "Walk": SubResource("Animation_86q6n")
 }
 
@@ -331,6 +359,9 @@ size = Vector2(156, 80)
 radius = 11.0
 height = 34.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_30r41"]
+radius = 18.0278
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exdyg"]
 size = Vector2(6.51781, 10.4167)
 
@@ -355,8 +386,9 @@ autoplay = "Idle"
 position = Vector2(2, -11)
 scale = Vector2(0.86, 0.8)
 sprite_frames = SubResource("SpriteFrames_bymc4")
-animation = &"Walk"
+animation = &"Attack"
 autoplay = "Idle"
+frame = 5
 
 [node name="Directions" type="Node2D" parent="."]
 
@@ -401,14 +433,21 @@ target_position = Vector2(0, 9)
 [node name="DamageBox" type="Node2D" parent="Directions/AttackDirection"]
 
 [node name="HurtBox" type="Area2D" parent="Directions/AttackDirection/DamageBox"]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 1024
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/AttackDirection/DamageBox/HurtBox"]
 shape = SubResource("CapsuleShape2D_scsd2")
 debug_color = Color(0.913725, 0.160784, 0.603922, 0.211765)
 
 [node name="HitBox" type="Area2D" parent="Directions/AttackDirection/DamageBox"]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/AttackDirection/DamageBox/HitBox"]
+position = Vector2(13, 0)
+shape = SubResource("CircleShape2D_30r41")
+debug_color = Color(0.664483, 0.511499, 0.0644598, 0.42)
 
 [node name="RangeBox" type="Node2D" parent="Directions/AttackDirection"]
 
@@ -426,4 +465,5 @@ debug_color = Color(0.302338, 0.520014, 0.924175, 0.42)
 [connection signal="timeout" from="Directions/Zones/Timers/TimerIdle" to="." method="_on_timer_idle_timeout"]
 [connection signal="body_exited" from="Directions/Zones/ExitZone" to="." method="_on_exit_zone_body_exited"]
 [connection signal="body_entered" from="Directions/Zones/DetecteZone" to="." method="_on_detecte_zone_body_entered"]
+[connection signal="area_entered" from="Directions/AttackDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="body_entered" from="Directions/AttackDirection/RangeBox/AttackRange" to="." method="_on_attack_range_body_entered"]

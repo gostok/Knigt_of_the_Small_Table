@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
+signal health_changed(new_health)
+
 enum {
 	MOVE, ATTACK_1, ATTACK_2, ATTACK_3, ATTACK_4, ATTACK_AIR, SLIDE,
-	ROLL, CLIMB, DEATH, HEALTH
+	ROLL, CLIMB, DEATH, HEALTH, DAMAGE
 }
 var state = MOVE
 var gold = 0
-var health = 100
+var health 
+var max_health = 100
 const SPEED = 100
 const JUMP = -200.0
 var combo = false
@@ -18,6 +21,8 @@ var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
 
 func _ready() -> void:
 	add_to_group('players')
+	Signals.connect("enemy_attack", Callable(self, "_on_damage_received"))
+	health = max_health
 
 func _physics_process(delta):
 	match  state:
@@ -30,6 +35,7 @@ func _physics_process(delta):
 		SLIDE: slide_state()
 		ROLL: roll_state()
 		DEATH: death_state()
+		DAMAGE: damage_state()
 		HEALTH: pass
 		CLIMB: pass
 
@@ -39,6 +45,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("space") and is_on_floor():
 		velocity.y = JUMP
 		animPlayer.play('jump')
+	
+	if health <= 0:
+		health = 0
+		state = DEATH
 
 	move_and_slide()
 
@@ -68,12 +78,11 @@ func move_state():
 		state = ATTACK_AIR
 
 func death_state():
-	if health <= 0:
-		health = 0
-		animPlayer.play('death')
-		await anim.animation_finished
-		queue_free()
-		get_tree().change_scene_to_file("res://all_scenes/all_menu/main_menu/main_menu.tscn")
+	velocity.x = 0
+	animPlayer.play('death')
+	await anim.animation_finished
+	queue_free()
+	get_tree().change_scene_to_file("res://all_scenes/all_menu/main_menu/main_menu.tscn")
 
 func slide_state():
 	animPlayer.play('slide')
@@ -133,3 +142,18 @@ func attack_freeze():
 	attack_cooldown = true
 	await get_tree().create_timer(0.8).timeout
 	attack_cooldown = false
+
+func damage_state():
+	velocity.x = 0
+	animPlayer.play('hit')
+	await animPlayer.animation_finished
+	state = MOVE
+
+func _on_damage_received(enemy_damage):
+	health -= enemy_damage
+	if health <= 0:
+		health = 0
+		state = DEATH
+	else:
+		state = DAMAGE
+	emit_signal("health_changed", health)

@@ -9,6 +9,7 @@ enum {
 }
 
 var state = IDLE
+var damage = 20
 
 
 
@@ -24,6 +25,7 @@ var Axis = [Vector2.LEFT, Vector2.RIGHT]
 
 func _ready() -> void:
 	randomize()
+
 
 
 
@@ -125,3 +127,9 @@ func attack_state():
 	await animEnemy.animation_finished
 	$Directions/AttackDirection/RangeBox/AttackRange/CollisionShape2D.disabled = true
 	state = CHASE
+
+
+
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	Signals.emit_signal("enemy_attack", damage)
