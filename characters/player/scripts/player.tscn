@@ -1305,3 +1305,5 @@ drag_horizontal_enabled = true
 drag_left_margin = 0.3
 drag_right_margin = 0.3
 drag_bottom_margin = 0.15
+
+[connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]

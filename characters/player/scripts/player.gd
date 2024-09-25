@@ -9,6 +9,7 @@ enum {
 var state = MOVE
 var gold = 0
 var health 
+var damage = 25
 var max_health = 100
 const SPEED = 100
 const JUMP = -200.0
@@ -157,3 +158,7 @@ func _on_damage_received(enemy_damage):
 	else:
 		state = DAMAGE
 	emit_signal("health_changed", health)
+
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	Signals.emit_signal("player_attack", damage)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://8582b1pv2q5o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hv2vp"]
+animations = []
+
+[node name="Final_Boss" type="CharacterBody2D"]
+
+[node name="Animations" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Animations"]
+position = Vector2(2, -11)
+scale = Vector2(0.86, 0.8)
+sprite_frames = SubResource("SpriteFrames_hv2vp")
+animation = &"Attack"

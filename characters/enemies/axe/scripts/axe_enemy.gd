@@ -5,12 +5,14 @@ enum {
 	ATTACK,
 	WANDERING,
 	IDLE,
-	STOP
+	STOP,
+	DAMAGE,
+	DEATH
 }
 
 var state = IDLE
 var damage = 20
-
+var health = 50
 
 
 var player = null
@@ -25,6 +27,7 @@ var Axis = [Vector2.LEFT, Vector2.RIGHT]
 
 func _ready() -> void:
 	randomize()
+	Signals.connect("player_attack", Callable(self, "_on_damage_received"))
 
 
 
@@ -71,7 +74,10 @@ func _physics_process(delta: float) -> void:
 
 	elif state == ATTACK:
 		attack_state()
-
+	elif state == DEATH:
+		death_state()
+	elif state == DAMAGE:
+		damage_state()
 
 
 	if velocity.x < 0:
@@ -83,7 +89,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func death_state():
+	velocity.x = 0
+	anim.play('Death')
+	await anim.animation_finished
+	queue_free()
 
+func damage_state():
+	velocity.x = 0
+	animEnemy.play("hit")
+	await animEnemy.animation_finished
+	state = CHASE
 
 
 
@@ -129,7 +145,13 @@ func attack_state():
 	state = CHASE
 
 
-
+func _on_damage_received(player_damage):
+	health -= player_damage
+	if health <= 0:
+		health = 0
+		state = DEATH
+	else:
+		state = DAMAGE
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	Signals.emit_signal("enemy_attack", damage)
