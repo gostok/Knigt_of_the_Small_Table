@@ -1,14 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://8582b1pv2q5o"]
+[gd_scene load_steps=8 format=3 uid="uid://8582b1pv2q5o"]
+
+[ext_resource type="Texture2D" uid="uid://b3ucdd38t5mim" path="res://characters/enemies/final_boss/sprites/Character_sheet.png" id="1_cr1dm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4y6lf"]
+radius = 24.0
+height = 64.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph8bq"]
+atlas = ExtResource("1_cr1dm")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t83y"]
+atlas = ExtResource("1_cr1dm")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g36al"]
+atlas = ExtResource("1_cr1dm")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f24b"]
+atlas = ExtResource("1_cr1dm")
+region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hv2vp"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ph8bq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t83y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g36al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f24b")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 8.0
+}]
 
 [node name="Final_Boss" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_4y6lf")
 
 [node name="Animations" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Animations"]
-position = Vector2(2, -11)
-scale = Vector2(0.86, 0.8)
+position = Vector2(0, -27)
+scale = Vector2(1.46, 1.32)
 sprite_frames = SubResource("SpriteFrames_hv2vp")
-animation = &"Attack"
+animation = &"Idle"
+autoplay = "Idle"
+frame = 3
+frame_progress = 1.0
