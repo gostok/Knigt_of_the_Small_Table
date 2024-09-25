@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://disvedmomvt6i"
-path="res://.godot/imported/demon_slime_FREE_v1.0_288x160_spritesheet.png-caac0dcd0fe9b7c1ff843da03a902f87.ctex"
+uid="uid://b3ucdd38t5mim"
+path="res://.godot/imported/Character_sheet.png-ea5e62311725f2517994ddfdb0238806.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/enemies/final_boss/sprites/demon_slime_FREE_v1.0_288x160_spritesheet.png"
-dest_files=["res://.godot/imported/demon_slime_FREE_v1.0_288x160_spritesheet.png-caac0dcd0fe9b7c1ff843da03a902f87.ctex"]
+source_file="res://characters/enemies/final_boss/sprites/Character_sheet.png"
+dest_files=["res://.godot/imported/Character_sheet.png-ea5e62311725f2517994ddfdb0238806.ctex"]
 
 [params]
 
