@@ -78,14 +78,14 @@ offset_bottom = 190.129
 color = Color(0.594928, 0.278089, 0.0570762, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="StaticBody2D"]
-offset_left = 580.206
-offset_top = 163.453
-offset_right = 774.206
-offset_bottom = 200.453
+offset_left = 579.342
+offset_top = 178.631
+offset_right = 773.342
+offset_bottom = 215.631
 color = Color(0.596078, 0.278431, 0.0588235, 1)
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(677.519, 181.22)
+position = Vector2(676.043, 197.312)
 shape = SubResource("RectangleShape2D_j1y81")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
@@ -102,9 +102,6 @@ texture_under = SubResource("AtlasTexture_70mo5")
 texture_progress = SubResource("AtlasTexture_yad5v")
 tint_under = Color(1, 1, 1, 0.72549)
 
-[node name="Player" parent="." instance=ExtResource("1_m1ugv")]
-position = Vector2(589, 548)
-
 [node name="Axe_Enemy" parent="." instance=ExtResource("2_yl6xe")]
 position = Vector2(337, 487)
 
@@ -112,6 +109,9 @@ position = Vector2(337, 487)
 position = Vector2(163, 545)
 
 [node name="Final_Boss" parent="." instance=ExtResource("6_736vw")]
-position = Vector2(786, 497)
+position = Vector2(792, 496)
+
+[node name="Player" parent="." instance=ExtResource("1_m1ugv")]
+position = Vector2(589, 548)
 
 [connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]

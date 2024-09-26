@@ -2373,28 +2373,23 @@ flip_v = true
 
 [node name="wall19" type="Sprite2D" parent="assets/main/back"]
 position = Vector2(400, 24)
-scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
 [node name="wall20" type="Sprite2D" parent="assets/main/back"]
 position = Vector2(448, 8)
-scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
 [node name="wall21" type="Sprite2D" parent="assets/main/back"]
 position = Vector2(496, 8)
-scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
 [node name="wall22" type="Sprite2D" parent="assets/main/back"]
 position = Vector2(544, 8)
-scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
 [node name="wall23" type="Sprite2D" parent="assets/main/back"]
 position = Vector2(592, 24)
-scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
@@ -2420,12 +2415,10 @@ texture = SubResource("AtlasTexture_jyn17")
 
 [node name="wall8" type="Sprite2D" parent="assets/main/back"]
 position = Vector2(400, 136)
-scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
 [node name="wall9" type="Sprite2D" parent="assets/main/back"]
 position = Vector2(592, 136)
-scale = Vector2(1, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
 [node name="wall2" type="Sprite2D" parent="assets/main/back"]
@@ -2481,10 +2474,12 @@ layer_0/tile_data = PackedInt32Array(0, 589824, 3, 65536, 589824, 4, 131072, 589
 
 [node name="other" type="Node2D" parent="assets"]
 
-[node name="bookshelf" type="Sprite2D" parent="assets/other"]
+[node name="book_shelf" type="Node2D" parent="assets/other"]
+
+[node name="bookshelf" type="Sprite2D" parent="assets/other/book_shelf"]
 position = Vector2(65, 160)
 texture = SubResource("AtlasTexture_r8nx5")
 
-[node name="bookshelf_2" type="Sprite2D" parent="assets/other"]
+[node name="bookshelf_2" type="Sprite2D" parent="assets/other/book_shelf"]
 position = Vector2(224, 160)
 texture = SubResource("AtlasTexture_r8nx5")

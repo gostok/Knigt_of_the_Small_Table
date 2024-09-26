@@ -19,11 +19,13 @@ var attack_cooldown = false
 @onready var animPlayer = $Animation/AnimationPlayer
 
 var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
+signal player_created
 
 func _ready() -> void:
 	add_to_group('players')
 	Signals.connect("enemy_attack", Callable(self, "_on_damage_received"))
 	health = max_health
+	emit_signal('player_created', self)
 
 func _physics_process(delta):
 	match  state:
@@ -162,3 +164,4 @@ func _on_damage_received(enemy_damage):
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	Signals.emit_signal("player_attack", damage)
+	area.take_damage()
