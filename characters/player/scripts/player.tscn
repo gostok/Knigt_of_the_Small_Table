@@ -1295,7 +1295,7 @@ texture = ExtResource("13_6nsbl")
 occluder = SubResource("OccluderPolygon2D_h1a26")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.4, 2.4)
+zoom = Vector2(3, 3)
 process_callback = 0
 limit_left = 0
 limit_right = 5000

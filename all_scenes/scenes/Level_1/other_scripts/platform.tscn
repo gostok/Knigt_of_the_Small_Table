@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bms54f0pw2lj4"]
+
+[ext_resource type="Script" path="res://all_scenes/scenes/Level_1/other_scripts/platform.gd" id="1_7pso3"]
+[ext_resource type="Texture2D" uid="uid://v1ijunbdawus" path="res://all_scenes/assets/main_lev_build.png" id="2_snytu"]
+
+[sub_resource type="Curve2D" id="Curve2D_ospja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7m38t"]
+size = Vector2(32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuse0"]
+atlas = ExtResource("2_snytu")
+region = Rect2(256, 192, 32, 16)
+
+[node name="platform" type="Path2D"]
+curve = SubResource("Curve2D_ospja")
+script = ExtResource("1_7pso3")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+update_rotation = false
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_7m38t")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+position = Vector2(0, 4)
+scale = Vector2(1, 0.5)
+texture = SubResource("AtlasTexture_fuse0")
