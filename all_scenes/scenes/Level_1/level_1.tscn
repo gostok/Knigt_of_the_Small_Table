@@ -1,9 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgnp25bkh00xb"]
+[gd_scene load_steps=24 format=3 uid="uid://dgnp25bkh00xb"]
 
+[ext_resource type="Script" path="res://all_scenes/scenes/Level_1/scripts/level_1.gd" id="1_gdfuj"]
 [ext_resource type="Texture2D" uid="uid://v1ijunbdawus" path="res://all_scenes/assets/main_lev_build.png" id="1_j5hhq"]
 [ext_resource type="Texture2D" uid="uid://b3fjinelm3x0s" path="res://all_scenes/assets/other_and_decorative.png" id="2_67nhx"]
 [ext_resource type="PackedScene" uid="uid://ds3j11evmvpr2" path="res://characters/player/scripts/player.tscn" id="3_tifps"]
 [ext_resource type="PackedScene" uid="uid://bms54f0pw2lj4" path="res://all_scenes/scenes/Level_1/other_scripts/platform.tscn" id="4_lfgga"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74kxx"]
+size = Vector2(720, 223)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cidp"]
+size = Vector2(719, 223)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltdkm"]
 atlas = ExtResource("1_j5hhq")
@@ -2411,6 +2418,38 @@ region = Rect2(16, 240, 48, 64)
 atlas = ExtResource("2_67nhx")
 region = Rect2(209, 113, 14, 15)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ovd0"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1152, 80, 144, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbp0p"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1312, 145, 48, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16cjb"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1312, 80, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjodn"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1472, 208, 80, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xntkj"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1472, 208, 80, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g42w"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1393, 128, 16, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swfqv"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1472, 96, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3kxd"]
+atlas = ExtResource("1_j5hhq")
+region = Rect2(1472, 176, 64, 17)
+
 [sub_resource type="Curve2D" id="Curve2D_k8pfr"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -16, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, -16, 0)
@@ -2418,170 +2457,499 @@ _data = {
 point_count = 3
 
 [node name="Level_1" type="Node2D"]
+script = ExtResource("1_gdfuj")
 
 [node name="assets" type="Node2D" parent="."]
 
-[node name="main" type="Node2D" parent="assets"]
+[node name="top_" type="Node2D" parent="assets"]
 
-[node name="back" type="Node2D" parent="assets/main"]
+[node name="area" type="Node2D" parent="assets/top_"]
 
-[node name="window" type="Sprite2D" parent="assets/main/back"]
+[node name="Enter" type="Area2D" parent="assets/top_/area"]
+collision_layer = 524288
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="assets/top_/area/Enter"]
+visible = false
+position = Vector2(360, 111.5)
+shape = SubResource("RectangleShape2D_74kxx")
+
+[node name="Exit" type="Area2D" parent="assets/top_/area"]
+collision_layer = 524288
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="assets/top_/area/Exit"]
+visible = false
+position = Vector2(359.5, 111.5)
+shape = SubResource("RectangleShape2D_3cidp")
+
+[node name="main" type="Node2D" parent="assets/top_"]
+
+[node name="back" type="Node2D" parent="assets/top_/main"]
+
+[node name="window" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(496, 128)
 texture = SubResource("AtlasTexture_ltdkm")
 
-[node name="wall" type="Sprite2D" parent="assets/main/back"]
+[node name="wall" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(60, 136)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall12" type="Sprite2D" parent="assets/main/back"]
+[node name="wall12" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(60, 24)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall14" type="Sprite2D" parent="assets/main/back"]
+[node name="wall14" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(156, 24)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall16" type="Sprite2D" parent="assets/main/back"]
+[node name="wall16" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(252, 24)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall17" type="Sprite2D" parent="assets/main/back"]
+[node name="wall17" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(308, 24)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall25" type="Sprite2D" parent="assets/main/back"]
+[node name="wall25" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(684, 24)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall19" type="Sprite2D" parent="assets/main/back"]
+[node name="wall19" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(400, 24)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall20" type="Sprite2D" parent="assets/main/back"]
+[node name="wall20" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(448, 8)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall21" type="Sprite2D" parent="assets/main/back"]
+[node name="wall21" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(496, 8)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall22" type="Sprite2D" parent="assets/main/back"]
+[node name="wall22" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(544, 8)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall23" type="Sprite2D" parent="assets/main/back"]
+[node name="wall23" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(592, 24)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall3" type="Sprite2D" parent="assets/main/back"]
+[node name="wall3" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(156, 136)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall5" type="Sprite2D" parent="assets/main/back"]
+[node name="wall5" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(252, 136)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall6" type="Sprite2D" parent="assets/main/back"]
+[node name="wall6" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(308, 136)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall11" type="Sprite2D" parent="assets/main/back"]
+[node name="wall11" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(684, 136)
 scale = Vector2(1.16667, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall8" type="Sprite2D" parent="assets/main/back"]
+[node name="wall8" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(400, 136)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall9" type="Sprite2D" parent="assets/main/back"]
+[node name="wall9" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(592, 136)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall2" type="Sprite2D" parent="assets/main/back"]
+[node name="wall2" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(108, 136)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall13" type="Sprite2D" parent="assets/main/back"]
+[node name="wall13" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(108, 24)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall15" type="Sprite2D" parent="assets/main/back"]
+[node name="wall15" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(204, 24)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall18" type="Sprite2D" parent="assets/main/back"]
+[node name="wall18" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(356, 24)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall24" type="Sprite2D" parent="assets/main/back"]
+[node name="wall24" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(636, 24)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 flip_v = true
 
-[node name="wall4" type="Sprite2D" parent="assets/main/back"]
+[node name="wall4" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(204, 136)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall7" type="Sprite2D" parent="assets/main/back"]
+[node name="wall7" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(356, 136)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="wall10" type="Sprite2D" parent="assets/main/back"]
+[node name="wall10" type="Sprite2D" parent="assets/top_/main/back"]
 position = Vector2(636, 136)
 scale = Vector2(0.833333, 1)
 texture = SubResource("AtlasTexture_jyn17")
 
-[node name="tilemap" type="Node2D" parent="assets/main"]
+[node name="tilemap" type="Node2D" parent="assets/top_/main"]
 
-[node name="TileMap" type="TileMap" parent="assets/main/tilemap"]
+[node name="TileMap" type="TileMap" parent="assets/top_/main/tilemap"]
 tile_set = SubResource("TileSet_0ijar")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 589824, 3, 65536, 589824, 4, 131072, 589824, 5, 196608, 589824, 6, 1, 655360, 3, 65537, 655360, 4, 131073, 655360, 5, 196609, 655360, 6, 2, 720896, 3, 65538, 720896, 4, 131074, 720896, 5, 196610, 720896, 6, 3, 786432, 3, 65539, 786432, 4, 131075, 786432, 5, 262144, 589824, 11, 327680, 589824, 12, 393216, 589824, 13, 458752, 589824, 14, 524288, 589824, 15, 589824, 589824, 16, 655360, 589824, 17, 720896, 589824, 18, 262145, 655360, 11, 327681, 655360, 12, 393217, 655360, 13, 458753, 655360, 14, 524289, 655360, 15, 589825, 655360, 16, 655361, 655360, 17, 720897, 655360, 18, 4, 917504, 3, 65540, 917504, 4, 5, 983040, 3, 65541, 983040, 4, 6, 1048576, 3, 65542, 1048576, 4, 7, 1114112, 3, 65543, 1114112, 4, 8, 1179648, 3, 65544, 1179648, 4, 9, 1245184, 3, 65545, 1245184, 4, 10, 1310720, 3, 65546, 1310720, 4, 11, 1376256, 3, 65547, 1376256, 4, 12, 1441792, 3, 65548, 1441792, 4, 13, 1507328, 3, 65549, 1507328, 4, 14, 1900544, 3, 65550, 1900544, 4, 131086, 1900544, 5, 15, 1966080, 3, 65551, 1966080, 4, 131087, 1966080, 5, 196623, 1966080, 6, 16, 2031616, 3, 65552, 2031616, 4, 131088, 2031616, 5, 196624, 2031616, 6, 17, 589824, 3, 65553, 589824, 4, 131089, 589824, 5, 196625, 589824, 6, 18, 655360, 3, 65554, 655360, 4, 131090, 655360, 5, 196626, 655360, 6, 19, 720896, 3, 65555, 720896, 4, 131091, 720896, 5, 196627, 720896, 6, 20, 786432, 3, 65556, 786432, 4, 131092, 786432, 5, 21, 917504, 3, 65557, 917504, 4, 22, 983040, 3, 65558, 983040, 4, 23, 1048576, 3, 65559, 1048576, 4, 24, 1114112, 3, 65560, 1114112, 4, 25, 1179648, 3, 65561, 1179648, 4, 26, 1245184, 3, 65562, 1245184, 4, 27, 1310720, 3, 65563, 1310720, 4, 28, 1376256, 3, 65564, 1376256, 4, 29, 1441792, 3, 65565, 1441792, 4, 30, 1507328, 3, 65566, 1507328, 4, 31, 917504, 3, 65567, 917504, 4, 32, 983040, 3, 65568, 983040, 4, 33, 1048576, 3, 65569, 1048576, 4, 34, 1114112, 3, 65570, 1114112, 4, 35, 1179648, 3, 65571, 1179648, 4, 36, 1245184, 3, 65572, 1245184, 4, 37, 1310720, 3, 65573, 1310720, 4, 38, 1376256, 3, 65574, 1376256, 4, 39, 1441792, 3, 65575, 1441792, 4, 40, 1507328, 3, 65576, 1507328, 4, 41, 1900544, 3, 65577, 1900544, 4, 131113, 1900544, 5, 42, 1966080, 3, 65578, 1966080, 4, 131114, 1966080, 5, 196650, 1966080, 6, 43, 2031616, 3, 65579, 2031616, 4, 131115, 2031616, 5, 196651, 2031616, 6, 44, 2097152, 3, 65580, 2097152, 4, 131116, 2097152, 5, 196652, 2097152, 6, 786432, 589824, 20, 851968, 589824, 21, 786433, 655360, 20, 851969, 655360, 21, 786434, 917504, 20, 851970, 917504, 21, 786435, 983040, 20, 851971, 983040, 21, 786436, 1048576, 20, 851972, 1048576, 21, 786437, 1114112, 20, 851973, 1114112, 21, 786438, 1179648, 20, 851974, 1179648, 21, 786439, 1245184, 20, 851975, 1245184, 21, 786440, 1310720, 20, 851976, 1310720, 21, 786441, 1376256, 20, 851977, 1376256, 21, 786442, 1441792, 20, 851978, 1441792, 21, 786443, 1507328, 20, 851979, 1507328, 21, 786444, 1572864, 20, 851980, 1572864, 21, 786445, 1638400, 20, 851981, 1638400, 21, 786446, 1703936, 20, 851982, 1703936, 21, 786447, 1769472, 20, 851983, 1769472, 21, 786451, 917504, 20, 851987, 917504, 21, 786452, 983040, 20, 851988, 983040, 21, 786453, 1048576, 20, 851989, 1048576, 21, 786454, 1114112, 20, 851990, 1114112, 21, 786455, 1179648, 20, 851991, 1179648, 21, 786456, 1245184, 20, 851992, 1245184, 21, 786457, 1310720, 20, 851993, 1310720, 21, 786458, 1376256, 20, 851994, 1376256, 21, 786459, 1441792, 20, 851995, 1441792, 21, 786460, 1507328, 20, 851996, 1507328, 21, 786461, 917504, 20, 851997, 917504, 21, 786462, 983040, 20, 851998, 983040, 21, 786463, 1048576, 20, 851999, 1048576, 21, 786464, 1114112, 20, 852000, 1114112, 21, 786465, 1179648, 20, 852001, 1179648, 21, 786466, 1245184, 20, 852002, 1245184, 21, 786467, 1310720, 20, 852003, 1310720, 21, 786468, 1376256, 20, 852004, 1376256, 21, 786469, 1441792, 20, 852005, 1441792, 21, 786470, 1507328, 20, 852006, 1507328, 21, 786471, 1572864, 20, 852007, 1572864, 21, 786472, 1638400, 20, 852008, 1638400, 21, 786473, 1703936, 20, 852009, 1703936, 21, 786474, 1769472, 20, 852010, 1769472, 21, 786475, 2031616, 20, 852011, 2031616, 21, 786476, 2228224, 14, 852012, 2228224, 15, 786448, 2031616, 20, 851984, 2031616, 21, 786449, 589824, 20, 851985, 589824, 21, 786450, 655360, 20, 851986, 655360, 21, 852013, 2293760, 15, 917549, 2293760, 16, 917550, 2228224, 14, 983086, 2228224, 15, 983087, 2293760, 15, 1048623, 2293760, 16, 1048624, 2359296, 16, 1114169, 983040, 20, 1179705, 983040, 21, 1114170, 1048576, 20, 1179706, 1048576, 21, 1114171, 1114112, 20, 1179707, 1114112, 21, 1114172, 1179648, 20, 1179708, 1179648, 21, 1114173, 1245184, 20, 1179709, 1245184, 21, 1114174, 1310720, 20, 1179710, 1310720, 21, 1114175, 1376256, 20, 1179711, 1376256, 21, 1114176, 917504, 20, 1179712, 917504, 21, 1114177, 983040, 20, 1179713, 983040, 21, 1114178, 1048576, 20, 1179714, 1048576, 21, 1114179, 1114112, 20, 1179715, 1114112, 21, 1114180, 1179648, 20, 1179716, 1179648, 21, 1114181, 1245184, 20, 1179717, 1245184, 21, 1114182, 1310720, 20, 1179718, 1310720, 21, 1114183, 1376256, 20, 1179719, 1376256, 21, 1114184, 1441792, 20, 1179720, 1441792, 21, 1114185, 1507328, 20, 1179721, 1507328, 21, 1114186, 1572864, 20, 1179722, 1572864, 21, 1114187, 1638400, 20, 1179723, 1638400, 21, 1114188, 1703936, 20, 1179724, 1703936, 21, 1114189, 1769472, 20, 1179725, 1769472, 21, 1114190, 1900544, 20, 1179726, 1900544, 21, 1179727, 2031616, 20, 1245263, 2031616, 21, 1179728, 2097152, 20, 1245264, 2097152, 21, 655439, 2031616, 11, 720975, 2031616, 12, 786511, 2031616, 13, 852047, 2031616, 14, 917583, 2031616, 15, 983119, 2031616, 16, 1048655, 2031616, 17, 1114191, 2031616, 18, 655440, 2097152, 11, 720976, 2097152, 12, 786512, 2097152, 13, 852048, 2097152, 14, 917584, 2097152, 15, 983120, 2097152, 16, 1048656, 2097152, 17, 1114192, 2097152, 18, 131151, 2031616, 5, 196687, 2031616, 6, 262223, 2031616, 15, 327759, 2031616, 16, 393295, 2031616, 17, 458831, 2031616, 18, 524367, 2031616, 17, 589903, 2031616, 18, 131152, 2097152, 5, 196688, 2097152, 6, 262224, 2097152, 15, 327760, 2097152, 16, 393296, 2097152, 17, 458832, 2097152, 18, 524368, 2097152, 17, 589904, 2097152, 18, 79, 2031616, 3, 65615, 2031616, 4, 80, 2097152, 3, 65616, 2097152, 4, 55, 589824, 3, 65591, 589824, 4, 131127, 589824, 5, 196663, 589824, 6, 262199, 589824, 13, 327735, 589824, 14, 393271, 589824, 15, 458807, 589824, 16, 56, 655360, 3, 65592, 655360, 4, 131128, 655360, 5, 196664, 655360, 6, 262200, 655360, 13, 327736, 655360, 14, 393272, 655360, 15, 458808, 655360, 16, 524343, 589824, 17, 589879, 589824, 18, 524344, 655360, 17, 589880, 655360, 18, 1114166, 1376256, 12, 1114167, 1441792, 12, 1179703, 1441792, 13, 1114168, 1507328, 12, 1179704, 1507328, 13, 77, 1900544, 3, 65613, 1900544, 4, 131149, 1900544, 5, 78, 1966080, 3, 65614, 1966080, 4, 131150, 1966080, 5, 196686, 1966080, 6, 57, 720896, 3, 65593, 720896, 4, 131129, 720896, 5, 196665, 720896, 6, 58, 786432, 3, 65594, 786432, 4, 131130, 786432, 5, 59, 917504, 3, 65595, 917504, 4, 60, 983040, 3, 65596, 983040, 4, 61, 1048576, 3, 65597, 1048576, 4, 62, 1114112, 3, 65598, 1114112, 4, 63, 1179648, 3, 65599, 1179648, 4, 64, 1245184, 3, 65600, 1245184, 4, 65, 1310720, 3, 65601, 1310720, 4, 66, 1376256, 3, 65602, 1376256, 4, 67, 917504, 3, 65603, 917504, 4, 68, 983040, 3, 65604, 983040, 4, 69, 1048576, 3, 65605, 1048576, 4, 70, 1114112, 3, 65606, 1114112, 4, 71, 1179648, 3, 65607, 1179648, 4, 72, 1245184, 3, 65608, 1245184, 4, 73, 1310720, 3, 65609, 1310720, 4, 74, 1376256, 3, 65610, 1376256, 4, 75, 1441792, 3, 65611, 1441792, 4, 76, 1507328, 3, 65612, 1507328, 4, 786503, 2883584, 4, 786504, 2949120, 4, 786501, 2883584, 4, 786502, 2949120, 4, 786495, 2883584, 4, 786496, 2949120, 4, 655417, 2883584, 4, 655418, 2949120, 4, 983117, 4063232, 4, 917577, 2752512, 4, 524362, 4063232, 4, 393293, 4063232, 4, 262217, 2883584, 4, 262218, 2949120, 4, 262211, 2752512, 4, 393280, 2752512, 4, 262204, 2949120, 4, 262205, 2883584, 4, 262203, 2883584, 4)
 
-[node name="other" type="Node2D" parent="assets"]
+[node name="other" type="Node2D" parent="assets/top_/main"]
 
-[node name="book_shelf" type="Node2D" parent="assets/other"]
+[node name="book_shelf" type="Node2D" parent="assets/top_/main/other"]
 
-[node name="bookshelf" type="Sprite2D" parent="assets/other/book_shelf"]
+[node name="bookshelf" type="Sprite2D" parent="assets/top_/main/other/book_shelf"]
 position = Vector2(65, 160)
 texture = SubResource("AtlasTexture_r8nx5")
 
-[node name="bookshelf_2" type="Sprite2D" parent="assets/other/book_shelf"]
+[node name="bookshelf_2" type="Sprite2D" parent="assets/top_/main/other/book_shelf"]
 position = Vector2(224, 160)
 texture = SubResource("AtlasTexture_r8nx5")
 
-[node name="box" type="Node2D" parent="assets/other"]
+[node name="box" type="Node2D" parent="assets/top_/main/other"]
 
-[node name="Sprite2D" type="Sprite2D" parent="assets/other/box"]
+[node name="Sprite2D" type="Sprite2D" parent="assets/top_/main/other/box"]
 position = Vector2(952, 56)
 texture = SubResource("AtlasTexture_xv77p")
+
+[node name="top_floor" type="Node2D" parent="assets/top_"]
+texture_filter = 1
+
+[node name="wall" type="Node2D" parent="assets/top_/top_floor"]
+
+[node name="main_wall" type="Node2D" parent="assets/top_/top_floor/wall"]
+
+[node name="wall" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(94.5, 57)
+scale = Vector2(0.645833, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall5" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(373, 57)
+scale = Vector2(0.645833, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall7" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(626, 57)
+scale = Vector2(0.645833, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall8" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(626, 169)
+scale = Vector2(0.645833, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall6" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(373, 169)
+scale = Vector2(0.645833, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall3" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(94, 169)
+scale = Vector2(0.645833, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall4" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(187, 169)
+scale = Vector2(0.645833, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall2" type="Sprite2D" parent="assets/top_/top_floor/wall/main_wall"]
+position = Vector2(186.75, 57)
+scale = Vector2(0.635417, 1)
+texture = SubResource("AtlasTexture_6ovd0")
+
+[node name="wall_1" type="Node2D" parent="assets/top_/top_floor/wall"]
+
+[node name="Sprite2D" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(24, 39)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D5" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(256, 39)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D13" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(696, 39)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D14" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(696, 86)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D15" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(696, 133)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D9" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(303, 39)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D17" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(496, 39)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D18" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(496, 86)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D19" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(496, 133)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D10" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(303, 86)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D11" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(303, 133)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D6" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(256, 86)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D7" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(256, 133)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D8" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(256, 182.125)
+scale = Vector2(1, 1.10106)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D12" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(303, 182.125)
+scale = Vector2(1, 1.10106)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D16" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(696, 182)
+scale = Vector2(1, 1.10106)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D20" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(496, 182)
+scale = Vector2(1, 1.10106)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D2" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(24, 86)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D3" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(24, 133)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="Sprite2D4" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_1"]
+position = Vector2(24, 182.25)
+scale = Vector2(1, 1.09574)
+texture = SubResource("AtlasTexture_vbp0p")
+
+[node name="wall_2" type="Node2D" parent="assets/top_/top_floor/wall"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(445.5, 72)
+scale = Vector2(0.828125, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D4" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(446, 120)
+scale = Vector2(0.828125, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D5" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(446, 168)
+scale = Vector2(0.828125, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D6" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(446, 208)
+scale = Vector2(0.828125, 0.666667)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D11" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(549.75, 208)
+scale = Vector2(0.945313, 0.666667)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D3" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(446, 24)
+scale = Vector2(0.828125, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D7" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(549.75, 24)
+scale = Vector2(0.945311, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D8" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(550, 72)
+scale = Vector2(0.945311, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D9" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(550, 120)
+scale = Vector2(0.945311, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="Sprite2D10" type="Sprite2D" parent="assets/top_/top_floor/wall/wall_2"]
+position = Vector2(550, 168)
+scale = Vector2(0.945311, 1)
+texture = SubResource("AtlasTexture_16cjb")
+
+[node name="floor8" type="Node2D" parent="assets/top_/top_floor"]
+
+[node name="floor" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(40, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor2" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(120, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor3" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(200, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor4" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(280, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor5" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(360, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor6" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(440, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor7" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(520, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor8" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(600, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="floor9" type="Sprite2D" parent="assets/top_/top_floor/floor8"]
+position = Vector2(680, 216)
+texture = SubResource("AtlasTexture_cjodn")
+
+[node name="ceiling" type="Node2D" parent="assets/top_/top_floor"]
+
+[node name="ceiling" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(40, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling2" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(120, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling3" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(200, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling4" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(280, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling5" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(360, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling6" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(440, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling7" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(520, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling8" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(600, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="ceiling9" type="Sprite2D" parent="assets/top_/top_floor/ceiling"]
+position = Vector2(680, 8)
+texture = SubResource("AtlasTexture_xntkj")
+
+[node name="beam" type="Node2D" parent="assets/top_/top_floor"]
+
+[node name="beam" type="Sprite2D" parent="assets/top_/top_floor/beam"]
+position = Vector2(8, 48)
+texture = SubResource("AtlasTexture_7g42w")
+
+[node name="beam2" type="Sprite2D" parent="assets/top_/top_floor/beam"]
+position = Vector2(8, 143)
+texture = SubResource("AtlasTexture_7g42w")
+
+[node name="beam3" type="Sprite2D" parent="assets/top_/top_floor/beam"]
+position = Vector2(8, 238)
+texture = SubResource("AtlasTexture_7g42w")
+
+[node name="beam4" type="Sprite2D" parent="assets/top_/top_floor/beam"]
+position = Vector2(713, 47)
+texture = SubResource("AtlasTexture_7g42w")
+
+[node name="beam5" type="Sprite2D" parent="assets/top_/top_floor/beam"]
+position = Vector2(713, 142)
+texture = SubResource("AtlasTexture_7g42w")
+
+[node name="beam6" type="Sprite2D" parent="assets/top_/top_floor/beam"]
+position = Vector2(713, 237)
+texture = SubResource("AtlasTexture_7g42w")
+
+[node name="window2" type="Node2D" parent="assets/top_/top_floor"]
+
+[node name="window" type="Sprite2D" parent="assets/top_/top_floor/window2"]
+position = Vector2(95, 137)
+texture = SubResource("AtlasTexture_swfqv")
+
+[node name="window2" type="Sprite2D" parent="assets/top_/top_floor/window2"]
+position = Vector2(187, 137)
+texture = SubResource("AtlasTexture_swfqv")
+
+[node name="window_sill" type="Sprite2D" parent="assets/top_/top_floor/window2"]
+position = Vector2(95, 177)
+texture = SubResource("AtlasTexture_r3kxd")
+
+[node name="window_sill2" type="Sprite2D" parent="assets/top_/top_floor/window2"]
+position = Vector2(187, 177)
+texture = SubResource("AtlasTexture_r3kxd")
 
 [node name="platforms" type="Node2D" parent="."]
 
@@ -2592,4 +2960,7 @@ position = Vector2(984, 136)
 curve = SubResource("Curve2D_k8pfr")
 
 [node name="Player" parent="." instance=ExtResource("3_tifps")]
-position = Vector2(944, 248)
+position = Vector2(750, 209)
+
+[connection signal="body_entered" from="assets/top_/area/Enter" to="." method="_on_enter_body_entered"]
+[connection signal="body_exited" from="assets/top_/area/Exit" to="." method="_on_exit_body_exited"]

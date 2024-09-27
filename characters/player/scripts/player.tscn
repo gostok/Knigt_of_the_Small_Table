@@ -1237,7 +1237,7 @@ polygon = PackedVector2Array(-3, 10, 4, 10, 5, 11, -4, 11)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16386
-collision_mask = 32773
+collision_mask = 557061
 script = ExtResource("1_3uo5h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
