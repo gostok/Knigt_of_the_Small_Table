@@ -11,12 +11,10 @@ The idea is elementary simple:
 
 A little about myself:
 
-I am GoStok, my name is Anton, I come from scary Russia :-).
-Musician (genres: synthwave, retrowave, councilwave and shoegaze) and a fan of gaming (especially old games, for example Heroes of Might and Magic).
-
-This is my first project, my first game.
-I hope it will be at least a little decent, at least for a beginner.
-
-Here I aim more at experience and pleasure.
+- I am GoStok, my name is Anton, I come from scary Russia :-).
+- Musician (genres: synthwave, retrowave, councilwave and shoegaze) and a fan of gaming (especially old games, for example Heroes of Might and Magic).
+- This is my first project, my first game.
+- I hope it will be at least a little decent, at least for a beginner.
+- Here I aim more at experience and pleasure.
 
 I hope to see you soon in KotST!
