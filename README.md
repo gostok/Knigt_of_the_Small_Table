@@ -1,7 +1,7 @@
 # Knigt_of_the_Small_Table
 
 Hello, dear guest.
-This repository serves as our connection, here the data about my game is updated - 2D platformer "Knigt of the Small Table".
+This repository serves as our connection, here the data about my game is updated - 2D pixel platformer "Knigt of the Small Table".
 
 The idea is elementary simple:
 - Fights with a sword and magic;
