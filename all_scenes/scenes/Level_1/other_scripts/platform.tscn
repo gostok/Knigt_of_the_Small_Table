@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://v1ijunbdawus" path="res://all_scenes/assets/main_lev_build.png" id="2_snytu"]
 
 [sub_resource type="Curve2D" id="Curve2D_ospja"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -2, 4, 0, 0, 0, 0, -2, -228, 0, 0, 0, 0, -2, 4)
+}
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7m38t"]
 size = Vector2(32, 8)
@@ -17,6 +21,8 @@ curve = SubResource("Curve2D_ospja")
 script = ExtResource("1_7pso3")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(-2, 4)
+rotation = -1.5708
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
