@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dgnp25bkh00xb"]
+[gd_scene load_steps=50 format=3 uid="uid://dgnp25bkh00xb"]
 
 [ext_resource type="Script" path="res://all_scenes/scenes/Level_1/scripts/level_1.gd" id="1_gdfuj"]
 [ext_resource type="Texture2D" uid="uid://v1ijunbdawus" path="res://all_scenes/assets/main_lev_build.png" id="1_j5hhq"]
@@ -2471,6 +2471,70 @@ sources/1 = SubResource("TileSetAtlasSource_dpfia")
 atlas = ExtResource("2_67nhx")
 region = Rect2(16, 240, 48, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uldbt"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(64, 112, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5p6g"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(16, 63, 32, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el6u1"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(100, 70, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy0qh"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(99, 85, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogc8p"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(193, 16, 12, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_062xb"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(229, 16, 5, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3icbo"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(257, 16, 12, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol3ml"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(16, 16, 31, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a14c"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjcqt"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(96, 16, 31, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfpkc"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(339, 16, 42, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlxk8"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(400, 16, 32, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obs1r"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(448, 15, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwidd"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(496, 17, 112, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5i2rk"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(304, 113, 112, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tesw2"]
+atlas = ExtResource("2_67nhx")
+region = Rect2(304, 16, 16, 60)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xv77p"]
 atlas = ExtResource("2_67nhx")
 region = Rect2(209, 113, 14, 15)
@@ -3047,15 +3111,129 @@ layer_0/tile_data = PackedInt32Array(0, 589824, 3, 65536, 589824, 4, 131072, 589
 
 [node name="other" type="Node2D" parent="assets/top_/main"]
 
-[node name="book_shelf" type="Node2D" parent="assets/top_/main/other"]
+[node name="decorative" type="Node2D" parent="assets/top_/main/other"]
 
-[node name="bookshelf" type="Sprite2D" parent="assets/top_/main/other/book_shelf"]
+[node name="book_shelf" type="Node2D" parent="assets/top_/main/other/decorative"]
+
+[node name="bookshelf" type="Sprite2D" parent="assets/top_/main/other/decorative/book_shelf"]
 position = Vector2(65, 160)
 texture = SubResource("AtlasTexture_r8nx5")
 
-[node name="bookshelf_2" type="Sprite2D" parent="assets/top_/main/other/book_shelf"]
+[node name="bookshelf_2" type="Sprite2D" parent="assets/top_/main/other/decorative/book_shelf"]
 position = Vector2(224, 160)
 texture = SubResource("AtlasTexture_r8nx5")
+
+[node name="table" type="Node2D" parent="assets/top_/main/other/decorative"]
+
+[node name="Sprite2D" type="Sprite2D" parent="assets/top_/main/other/decorative/table"]
+position = Vector2(170, 184)
+texture = SubResource("AtlasTexture_uldbt")
+
+[node name="shelf" type="Node2D" parent="assets/top_/main/other/decorative"]
+
+[node name="Sprite2D" type="Sprite2D" parent="assets/top_/main/other/decorative/shelf"]
+position = Vector2(123, 160)
+texture = SubResource("AtlasTexture_y5p6g")
+
+[node name="other_" type="Node2D" parent="assets/top_/main/other/decorative"]
+
+[node name="skull" type="Sprite2D" parent="assets/top_/main/other/decorative/other_"]
+position = Vector2(157, 171)
+texture = SubResource("AtlasTexture_el6u1")
+
+[node name="Sprite2D" type="Sprite2D" parent="assets/top_/main/other/decorative/other_"]
+position = Vector2(173, 171)
+texture = SubResource("AtlasTexture_sy0qh")
+
+[node name="chains" type="Node2D" parent="assets/top_/main/other/decorative/other_"]
+
+[node name="1_chain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/chains"]
+position = Vector2(296, 85)
+texture = SubResource("AtlasTexture_ogc8p")
+
+[node name="2_chain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/chains"]
+position = Vector2(283, 165)
+texture = SubResource("AtlasTexture_062xb")
+
+[node name="2_chain2" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/chains"]
+position = Vector2(279, 165)
+texture = SubResource("AtlasTexture_062xb")
+
+[node name="3_chain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/chains"]
+position = Vector2(266, 85)
+texture = SubResource("AtlasTexture_3icbo")
+
+[node name="web" type="Node2D" parent="assets/top_/main/other/decorative/other_"]
+
+[node name="1_web" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(57, 141)
+texture = SubResource("AtlasTexture_ol3ml")
+
+[node name="1_web2" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(504, 121)
+texture = SubResource("AtlasTexture_ol3ml")
+
+[node name="2_web" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(56, 29)
+texture = SubResource("AtlasTexture_6a14c")
+
+[node name="2_web2" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(104, 29)
+texture = SubResource("AtlasTexture_6a14c")
+
+[node name="2_web3" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(121, 29)
+texture = SubResource("AtlasTexture_6a14c")
+
+[node name="2_web4" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(123, 153)
+texture = SubResource("AtlasTexture_6a14c")
+
+[node name="3_web" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(80, 34)
+texture = SubResource("AtlasTexture_yjcqt")
+
+[node name="3_web4" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(522, 112)
+texture = SubResource("AtlasTexture_yjcqt")
+
+[node name="3_web2" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(224, 141)
+texture = SubResource("AtlasTexture_yjcqt")
+
+[node name="3_web5" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(195, 35)
+texture = SubResource("AtlasTexture_yjcqt")
+
+[node name="3_web3" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/web"]
+position = Vector2(431, 114)
+texture = SubResource("AtlasTexture_yjcqt")
+
+[node name="curtains" type="Node2D" parent="assets/top_/main/other/decorative/other_"]
+
+[node name="1_curtain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/curtains"]
+position = Vector2(224, 62)
+texture = SubResource("AtlasTexture_pfpkc")
+
+[node name="2_curtain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/curtains"]
+position = Vector2(64, 44)
+texture = SubResource("AtlasTexture_jlxk8")
+
+[node name="3_curtain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/curtains"]
+position = Vector2(97, 33)
+texture = SubResource("AtlasTexture_obs1r")
+
+[node name="4_curtain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/curtains"]
+position = Vector2(416, 73)
+texture = SubResource("AtlasTexture_rwidd")
+
+[node name="5_curtain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/curtains"]
+position = Vector2(529, 72)
+texture = SubResource("AtlasTexture_5i2rk")
+
+[node name="6_curtain" type="Sprite2D" parent="assets/top_/main/other/decorative/other_/curtains"]
+position = Vector2(280, 174)
+texture = SubResource("AtlasTexture_tesw2")
 
 [node name="box" type="Node2D" parent="assets/top_/main/other"]
 
@@ -3545,7 +3723,7 @@ curve = SubResource("Curve2D_irapj")
 position = Vector2(377, 674)
 
 [node name="Player" parent="." instance=ExtResource("3_tifps")]
-position = Vector2(634, 169)
+position = Vector2(51, 178)
 
 [connection signal="body_entered" from="assets/top_/area/Enter" to="." method="_on_enter_body_entered"]
 [connection signal="body_exited" from="assets/top_/area/Exit" to="." method="_on_exit_body_exited"]
