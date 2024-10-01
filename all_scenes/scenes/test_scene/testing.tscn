@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://be5ofn5mgok6l"]
+[gd_scene load_steps=16 format=3 uid="uid://be5ofn5mgok6l"]
 
 [ext_resource type="Script" path="res://all_scenes/scenes/test_scene/testing.gd" id="1_f1d8d"]
 [ext_resource type="PackedScene" uid="uid://ds3j11evmvpr2" path="res://characters/player/scripts/player.tscn" id="1_m1ugv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b0djvfl4mu8qt" path="res://characters/enemies/demon/Fallen_Knight_Enemy.tscn" id="3_pmqfc"]
 [ext_resource type="Texture2D" uid="uid://btyje3wvcvvxk" path="res://objects/healthBar/Healthbars_and_Potions.png" id="4_270r4"]
 [ext_resource type="PackedScene" uid="uid://8582b1pv2q5o" path="res://characters/enemies/final_boss/scripts/final_boss.tscn" id="6_736vw"]
+[ext_resource type="PackedScene" uid="uid://0110iynfm58l" path="res://all_scenes/scenes/objects/gold/gold.tscn" id="7_3s6rp"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x8ggn"]
 polygon = PackedVector2Array(3, -2, 1277, 2, 1277, 158, 2, 158)
@@ -29,6 +30,14 @@ region = Rect2(0, 81, 41, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yad5v"]
 atlas = ExtResource("4_270r4")
 region = Rect2(43, 0, 41, 8)
+
+[sub_resource type="GDScript" id="GDScript_jd87d"]
+script/source = "extends Label
+
+
+func _process(delta):
+	text = \"GOLD: \" + str($\"../../Player\".gold)
+"
 
 [node name="Testing" type="Node2D"]
 script = ExtResource("1_f1d8d")
@@ -102,6 +111,15 @@ texture_under = SubResource("AtlasTexture_70mo5")
 texture_progress = SubResource("AtlasTexture_yad5v")
 tint_under = Color(1, 1, 1, 0.72549)
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 64.0
+offset_right = 48.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 30
+text = "GOLD"
+script = SubResource("GDScript_jd87d")
+
 [node name="Axe_Enemy" parent="." instance=ExtResource("2_yl6xe")]
 position = Vector2(337, 487)
 
@@ -113,5 +131,8 @@ position = Vector2(792, 496)
 
 [node name="Player" parent="." instance=ExtResource("1_m1ugv")]
 position = Vector2(589, 548)
+
+[node name="gold" parent="." instance=ExtResource("7_3s6rp")]
+position = Vector2(520, 552)
 
 [connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]

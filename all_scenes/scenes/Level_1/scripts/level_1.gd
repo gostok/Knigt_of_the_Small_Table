@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player = $Player
+@onready var player = $characters/Player
 
 
 func _on_enter_body_entered(body):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dgnp25bkh00xb"]
+[gd_scene load_steps=51 format=3 uid="uid://dgnp25bkh00xb"]
 
 [ext_resource type="Script" path="res://all_scenes/scenes/Level_1/scripts/level_1.gd" id="1_gdfuj"]
 [ext_resource type="Texture2D" uid="uid://v1ijunbdawus" path="res://all_scenes/assets/main_lev_build.png" id="1_j5hhq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b3fjinelm3x0s" path="res://all_scenes/assets/other_and_decorative.png" id="2_67nhx"]
 [ext_resource type="PackedScene" uid="uid://ds3j11evmvpr2" path="res://characters/player/scripts/player.tscn" id="3_tifps"]
 [ext_resource type="PackedScene" uid="uid://bms54f0pw2lj4" path="res://all_scenes/scenes/Level_1/other_scripts/platform.tscn" id="4_lfgga"]
+[ext_resource type="PackedScene" uid="uid://0110iynfm58l" path="res://all_scenes/scenes/objects/gold/gold.tscn" id="6_n2nq0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74kxx"]
 size = Vector2(720, 223)
@@ -3722,7 +3723,14 @@ curve = SubResource("Curve2D_irapj")
 [node name="platform" parent="platforms/down" instance=ExtResource("4_lfgga")]
 position = Vector2(377, 674)
 
-[node name="Player" parent="." instance=ExtResource("3_tifps")]
+[node name="objects" type="Node2D" parent="."]
+
+[node name="gold" parent="objects" instance=ExtResource("6_n2nq0")]
+position = Vector2(1183, 60)
+
+[node name="characters" type="Node2D" parent="."]
+
+[node name="Player" parent="characters" instance=ExtResource("3_tifps")]
 position = Vector2(51, 178)
 
 [connection signal="body_entered" from="assets/top_/area/Enter" to="." method="_on_enter_body_entered"]
