@@ -1237,7 +1237,7 @@ polygon = PackedVector2Array(-3, 10, 4, 10, 5, 11, -4, 11)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16386
-collision_mask = 557061
+collision_mask = 559117
 script = ExtResource("1_3uo5h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1274,7 +1274,7 @@ debug_color = Color(0.931912, 0.196172, 0.440326, 0.42)
 
 [node name="HitBox" type="Area2D" parent="AttackDirection/DamageBox"]
 collision_layer = 0
-collision_mask = 1024
+collision_mask = 3072
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDirection/DamageBox/HitBox"]
 position = Vector2(6, 0)

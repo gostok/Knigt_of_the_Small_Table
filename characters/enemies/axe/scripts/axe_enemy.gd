@@ -94,6 +94,7 @@ func death_state():
 	anim.play('Death')
 	await anim.animation_finished
 	queue_free()
+	Signals.emit_signal("enemy_died", position)
 
 func damage_state():
 	velocity.x = 0

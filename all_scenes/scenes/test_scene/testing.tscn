@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://be5ofn5mgok6l"]
+[gd_scene load_steps=18 format=3 uid="uid://be5ofn5mgok6l"]
 
 [ext_resource type="Script" path="res://all_scenes/scenes/test_scene/testing.gd" id="1_f1d8d"]
 [ext_resource type="PackedScene" uid="uid://ds3j11evmvpr2" path="res://characters/player/scripts/player.tscn" id="1_m1ugv"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b0djvfl4mu8qt" path="res://characters/enemies/demon/Fallen_Knight_Enemy.tscn" id="3_pmqfc"]
 [ext_resource type="Texture2D" uid="uid://btyje3wvcvvxk" path="res://objects/healthBar/Healthbars_and_Potions.png" id="4_270r4"]
 [ext_resource type="PackedScene" uid="uid://8582b1pv2q5o" path="res://characters/enemies/final_boss/scripts/final_boss.tscn" id="6_736vw"]
-[ext_resource type="PackedScene" uid="uid://0110iynfm58l" path="res://all_scenes/scenes/objects/gold/gold.tscn" id="7_3s6rp"]
+[ext_resource type="PackedScene" uid="uid://3upj7kctgh3e" path="res://all_scenes/scenes/objects/loot_box/box_loot.tscn" id="7_cxkod"]
+[ext_resource type="Script" path="res://all_scenes/scenes/test_scene/collectiblies.gd" id="8_eqljy"]
+[ext_resource type="PackedScene" uid="uid://bh8lc3jqeaq08" path="res://all_scenes/scenes/objects/gold/coin.tscn" id="8_l5w1e"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x8ggn"]
 polygon = PackedVector2Array(3, -2, 1277, 2, 1277, 158, 2, 158)
@@ -132,7 +134,13 @@ position = Vector2(792, 496)
 [node name="Player" parent="." instance=ExtResource("1_m1ugv")]
 position = Vector2(589, 548)
 
-[node name="gold" parent="." instance=ExtResource("7_3s6rp")]
-position = Vector2(520, 552)
+[node name="Box_Loot" parent="." instance=ExtResource("7_cxkod")]
+position = Vector2(528, 553)
+
+[node name="Collectiblies" type="Node2D" parent="."]
+script = ExtResource("8_eqljy")
+
+[node name="coin" parent="Collectiblies" instance=ExtResource("8_l5w1e")]
+position = Vector2(480, 555)
 
 [connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]

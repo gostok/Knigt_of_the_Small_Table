@@ -64,8 +64,10 @@ func move_state():
 			anim.play('run')
 		if direction == -1:
 			anim.flip_h = true
+			$AttackDirection.rotation_degrees = 180
 		elif direction == 1:
 			anim.flip_h = false
+			$AttackDirection.rotation_degrees = 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
@@ -164,4 +166,5 @@ func _on_damage_received(enemy_damage):
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	Signals.emit_signal("player_attack", damage)
-	area.take_damage()
+	Signals.emit_signal('player_hit', damage)
+	#area.take_damage()
