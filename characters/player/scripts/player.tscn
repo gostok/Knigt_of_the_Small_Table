@@ -1,8 +1,9 @@
-[gd_scene load_steps=124 format=3 uid="uid://ds3j11evmvpr2"]
+[gd_scene load_steps=133 format=3 uid="uid://ds3j11evmvpr2"]
 
 [ext_resource type="Script" path="res://characters/player/scripts/player.gd" id="1_3uo5h"]
 [ext_resource type="Texture2D" uid="uid://qakqabtsxdn8" path="res://characters/player/sprite/Idle.png" id="1_m2a14"]
 [ext_resource type="Texture2D" uid="uid://detcm54ianyfp" path="res://characters/player/sprite/Attacks.png" id="2_r8t65"]
+[ext_resource type="PackedScene" uid="uid://d2ht2l2tbfiyc" path="res://characters/player/sprite/fireball/fireball.tscn" id="2_yn7e3"]
 [ext_resource type="Texture2D" uid="uid://b4jnernlmtiiw" path="res://characters/player/sprite/attack_from_air.png" id="3_yp7i5"]
 [ext_resource type="Texture2D" uid="uid://dvx5qcnv32ypv" path="res://characters/player/sprite/Climb.png" id="4_2nb5v"]
 [ext_resource type="Texture2D" uid="uid://crkns8bqyelqn" path="res://characters/player/sprite/Death.png" id="5_tpxii"]
@@ -209,6 +210,34 @@ region = Rect2(0, 64, 128, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0yl7n"]
 atlas = ExtResource("5_tpxii")
 region = Rect2(128, 64, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxk44"]
+atlas = ExtResource("2_r8t65")
+region = Rect2(0, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja5u2"]
+atlas = ExtResource("2_r8t65")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dy03"]
+atlas = ExtResource("2_r8t65")
+region = Rect2(128, 64, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvyia"]
+atlas = ExtResource("2_r8t65")
+region = Rect2(256, 64, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfdcx"]
+atlas = ExtResource("2_r8t65")
+region = Rect2(384, 64, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38y4q"]
+atlas = ExtResource("2_r8t65")
+region = Rect2(512, 64, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr87k"]
+atlas = ExtResource("2_r8t65")
+region = Rect2(640, 64, 128, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eb4dt"]
 atlas = ExtResource("6_l4mbe")
@@ -562,6 +591,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_yxk44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja5u2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dy03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvyia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfdcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38y4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr87k")
+}],
+"loop": false,
+"name": &"fireball_attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_eb4dt")
 }, {
 "duration": 1.0,
@@ -714,6 +769,21 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Animation" id="Animation_uumjp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_3kkvy"]
 loop_mode = 1
 tracks/0/type = "value"
@@ -739,21 +809,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Idle"]
-}
-
-[sub_resource type="Animation" id="Animation_uumjp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_mojqn"]
@@ -1047,6 +1102,33 @@ tracks/1/keys = {
 "values": ["death"]
 }
 
+[sub_resource type="Animation" id="Animation_dykmy"]
+length = 0.875
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animation/AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["fireball_attack"]
+}
+
 [sub_resource type="Animation" id="Animation_bek1s"]
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1128,6 +1210,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_loyn2"]
 length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1217,6 +1300,7 @@ _data = {
 "attack_air": SubResource("Animation_kljk3"),
 "climb": SubResource("Animation_fjg78"),
 "death": SubResource("Animation_nsjfa"),
+"fireball_attack": SubResource("Animation_dykmy"),
 "health": SubResource("Animation_bek1s"),
 "hit": SubResource("Animation_ikrhl"),
 "jump": SubResource("Animation_l14it"),
@@ -1239,6 +1323,7 @@ polygon = PackedVector2Array(-3, 10, 4, 10, 5, 11, -4, 11)
 collision_layer = 16386
 collision_mask = 559117
 script = ExtResource("1_3uo5h")
+fireball = ExtResource("2_yn7e3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_fwsoe")
@@ -1249,9 +1334,8 @@ shape = SubResource("CapsuleShape2D_fwsoe")
 position = Vector2(0, -4)
 scale = Vector2(0.46875, 0.46875)
 sprite_frames = SubResource("SpriteFrames_0syy1")
-animation = &"attack_air"
+animation = &"fireball_attack"
 autoplay = "Idle"
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
 root_node = NodePath("../..")
@@ -1259,6 +1343,10 @@ libraries = {
 "": SubResource("AnimationLibrary_f0uic")
 }
 autoplay = "Idle"
+
+[node name="Node" type="Node" parent="Animation"]
+
+[node name="Marker2D" type="Marker2D" parent="Animation/Node"]
 
 [node name="AttackDirection" type="Node2D" parent="."]
 

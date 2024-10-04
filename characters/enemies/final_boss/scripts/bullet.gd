@@ -13,7 +13,7 @@ func _physics_process(delta):
 	velocity += acceleration * delta
 	rotation = velocity.angle()
 	
-	velocity = velocity.limit_length(150)
+	velocity = velocity.limit_length(250)
 	
 	position += velocity * delta
 

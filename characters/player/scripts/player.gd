@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal health_changed(new_health)
 
 enum {
-	MOVE, ATTACK_1, ATTACK_2, ATTACK_3, ATTACK_4, ATTACK_AIR, SLIDE,
+	MOVE, ATTACK_1, ATTACK_2, ATTACK_3, ATTACK_4, ATTACK_AIR, FIRE_ATTACK, SLIDE,
 	ROLL, CLIMB, DEATH, HEALTH, DAMAGE
 }
 var state = MOVE
@@ -17,6 +17,7 @@ var combo = false
 var attack_cooldown = false
 @onready var anim = $Animation/AnimatedSprite2D
 @onready var animPlayer = $Animation/AnimationPlayer
+@export var fireball: PackedScene
 
 var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
 signal player_created
@@ -35,6 +36,7 @@ func _physics_process(delta):
 		ATTACK_3: attack_3_state()
 		ATTACK_4: attack_4_state()
 		ATTACK_AIR: attack_air_state()
+		FIRE_ATTACK: fire_attack()
 		SLIDE: slide_state()
 		ROLL: roll_state()
 		DEATH: death_state()
@@ -81,6 +83,9 @@ func move_state():
 		state = ATTACK_1
 	if Input.is_action_just_pressed("attack") and not is_on_floor():
 		state = ATTACK_AIR
+	if Input.is_action_just_pressed("fire_attack"):
+		state = FIRE_ATTACK
+
 
 func death_state():
 	velocity.x = 0
@@ -139,6 +144,16 @@ func attack_air_state():
 	await animPlayer.animation_finished
 	state = MOVE
 
+func fire_attack():
+	if Input.is_action_just_pressed("fire_attack"):
+		state = FIRE_ATTACK
+	velocity.x = 0
+	animPlayer.play('fireball_attack')
+	await animPlayer.animation_finished
+	shoot()
+	attack_freeze()
+	state = MOVE
+
 func combo1():
 	combo = true
 	await animPlayer.animation_finished
@@ -168,3 +183,8 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 	Signals.emit_signal("player_attack", damage)
 	Signals.emit_signal('player_hit', damage)
 	#area.take_damage()
+
+func shoot():
+	var f = fireball.instantiate()
+	add_child(f)
+	f.transform = $Animation/Node/Marker2D.global_transform

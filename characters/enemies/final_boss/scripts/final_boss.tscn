@@ -976,7 +976,7 @@ shape = SubResource("CapsuleShape2D_4y6lf")
 position = Vector2(0, -27)
 scale = Vector2(1.46, 1.32)
 sprite_frames = SubResource("SpriteFrames_hv2vp")
-animation = &"melee_attack"
+animation = &"ranged_attack"
 autoplay = "Idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
