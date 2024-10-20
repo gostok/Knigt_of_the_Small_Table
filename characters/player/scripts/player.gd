@@ -15,9 +15,12 @@ const SPEED = 100
 const JUMP = -200.0
 var combo = false
 var attack_cooldown = false
+
 @onready var anim = $Animation/AnimatedSprite2D
 @onready var animPlayer = $Animation/AnimationPlayer
-@export var fireball: PackedScene
+@onready var attack_fire = $attack_fire
+
+
 
 var gravity = ProjectSettings.get_setting('physics/2d/default_gravity')
 signal player_created
@@ -51,6 +54,7 @@ func _physics_process(delta):
 		velocity.y = JUMP
 		animPlayer.play('jump')
 	
+	
 	if health <= 0:
 		health = 0
 		state = DEATH
@@ -67,13 +71,17 @@ func move_state():
 		if direction == -1:
 			anim.flip_h = true
 			$AttackDirection.rotation_degrees = 180
+
 		elif direction == 1:
 			anim.flip_h = false
 			$AttackDirection.rotation_degrees = 0
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
 			anim.play('Idle')
+	
+
 	
 	if Input.is_action_pressed('roll'):
 		state = ROLL
@@ -150,7 +158,7 @@ func fire_attack():
 	velocity.x = 0
 	animPlayer.play('fireball_attack')
 	await animPlayer.animation_finished
-	shoot()
+	attack_fire.shoot()
 	attack_freeze()
 	state = MOVE
 
@@ -183,8 +191,3 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 	Signals.emit_signal("player_attack", damage)
 	Signals.emit_signal('player_hit', damage)
 	#area.take_damage()
-
-func shoot():
-	var f = fireball.instantiate()
-	add_child(f)
-	f.transform = $Animation/Node/Marker2D.global_transform

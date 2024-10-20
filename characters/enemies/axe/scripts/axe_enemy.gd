@@ -28,7 +28,7 @@ var Axis = [Vector2.LEFT, Vector2.RIGHT]
 func _ready() -> void:
 	randomize()
 	Signals.connect("player_attack", Callable(self, "_on_damage_received"))
-
+	add_to_group("enemies")
 
 
 

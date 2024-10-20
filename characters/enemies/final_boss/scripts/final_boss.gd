@@ -21,6 +21,7 @@ var health = 200:
 func _ready():
 	set_physics_process(false)
 	Signals.connect("player_attack", Callable(self, "_on_damage_received"))
+	add_to_group("enemies")
 
 func _on_player_created(player_instance):
 	player = player_instance

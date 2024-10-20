@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://characters/player/scripts/player.gd" id="1_3uo5h"]
 [ext_resource type="Texture2D" uid="uid://qakqabtsxdn8" path="res://characters/player/sprite/Idle.png" id="1_m2a14"]
 [ext_resource type="Texture2D" uid="uid://detcm54ianyfp" path="res://characters/player/sprite/Attacks.png" id="2_r8t65"]
-[ext_resource type="PackedScene" uid="uid://d2ht2l2tbfiyc" path="res://characters/player/sprite/fireball/fireball.tscn" id="2_yn7e3"]
 [ext_resource type="Texture2D" uid="uid://b4jnernlmtiiw" path="res://characters/player/sprite/attack_from_air.png" id="3_yp7i5"]
 [ext_resource type="Texture2D" uid="uid://dvx5qcnv32ypv" path="res://characters/player/sprite/Climb.png" id="4_2nb5v"]
 [ext_resource type="Texture2D" uid="uid://crkns8bqyelqn" path="res://characters/player/sprite/Death.png" id="5_tpxii"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cs4aba8htqqs3" path="res://characters/player/sprite/Run.png" id="10_lw0sy"]
 [ext_resource type="Texture2D" uid="uid://bpxfm7u754ype" path="res://characters/player/sprite/Slide.png" id="11_jfka3"]
 [ext_resource type="Texture2D" uid="uid://cv80jqmbhkndj" path="res://characters/circle (1).png" id="13_6nsbl"]
+[ext_resource type="Script" path="res://characters/player/scripts/attack_fire.gd" id="14_sxwr1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwsoe"]
 radius = 6.0
@@ -769,21 +769,6 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="Animation" id="Animation_uumjp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_3kkvy"]
 loop_mode = 1
 tracks/0/type = "value"
@@ -809,6 +794,21 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["Idle"]
+}
+
+[sub_resource type="Animation" id="Animation_uumjp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_mojqn"]
@@ -1323,7 +1323,6 @@ polygon = PackedVector2Array(-3, 10, 4, 10, 5, 11, -4, 11)
 collision_layer = 16386
 collision_mask = 559117
 script = ExtResource("1_3uo5h")
-fireball = ExtResource("2_yn7e3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_fwsoe")
@@ -1336,6 +1335,7 @@ scale = Vector2(0.46875, 0.46875)
 sprite_frames = SubResource("SpriteFrames_0syy1")
 animation = &"fireball_attack"
 autoplay = "Idle"
+frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
 root_node = NodePath("../..")
@@ -1395,4 +1395,13 @@ drag_left_margin = 0.3
 drag_right_margin = 0.3
 drag_bottom_margin = 0.15
 
+[node name="attack_fire" type="Node2D" parent="."]
+script = ExtResource("14_sxwr1")
+
+[node name="Marker2D" type="Marker2D" parent="attack_fire"]
+position = Vector2(22, -1)
+
+[node name="shootSpeedTimer" type="Timer" parent="attack_fire"]
+
 [connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="timeout" from="attack_fire/shootSpeedTimer" to="attack_fire" method="_on_shoot_speed_timer_timeout"]

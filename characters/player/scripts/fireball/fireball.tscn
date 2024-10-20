@@ -1,0 +1,72 @@
+[gd_scene load_steps=14 format=3 uid="uid://1bxuwdg47wfx"]
+
+[ext_resource type="Texture2D" uid="uid://qbrt15d2jiqv" path="res://characters/player/sprite/fireball/FB001.png" id="1_gqjof"]
+[ext_resource type="Script" path="res://characters/player/scripts/fireball/fireball.gd" id="1_yc1js"]
+[ext_resource type="Texture2D" uid="uid://cu7d08yt5jihb" path="res://characters/player/sprite/fireball/FB002.png" id="2_odqlv"]
+[ext_resource type="Texture2D" uid="uid://cla5qgwxpmi1y" path="res://characters/player/sprite/fireball/FB003.png" id="3_m8gj3"]
+[ext_resource type="Texture2D" uid="uid://cyplq0cs23fl5" path="res://characters/player/sprite/fireball/FB004.png" id="4_wt3bk"]
+[ext_resource type="Texture2D" uid="uid://dj4f4uv2e0cxm" path="res://characters/player/sprite/fireball/FB005.png" id="5_oqrw7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt2gn"]
+atlas = ExtResource("1_gqjof")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwxq8"]
+atlas = ExtResource("2_odqlv")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nofjf"]
+atlas = ExtResource("3_m8gj3")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vypw3"]
+atlas = ExtResource("4_wt3bk")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkd7k"]
+atlas = ExtResource("5_oqrw7")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1jh6k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt2gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwxq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nofjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vypw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkd7k")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3e4tk"]
+radius = 7.07107
+
+[node name="fireball" type="Area2D"]
+collision_layer = 1048576
+collision_mask = 33797
+script = ExtResource("1_yc1js")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, 1)
+scale = Vector2(0.59375, 0.625)
+sprite_frames = SubResource("SpriteFrames_1jh6k")
+animation = &"fire"
+frame = 4
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3e4tk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
